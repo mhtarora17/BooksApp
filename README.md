@@ -5,25 +5,20 @@
 **1. Clone the application**
 
 ```bash
-https://github.com/givanthak/spring-boot-rest-api-tutorial.git
+https://github.com/mhtarora17/BooksApp.git
 ```
 
-**2. Create Mysql database**
-```bash
-create database user_database
-```
 
-**3. Change mysql username and password as per your installation**
+**3. H2 Db is configured in application.properties**
 
 + open `src/main/resources/application.properties`
 
-+ change `spring.datasource.username` and `spring.datasource.password` as per your mysql installation
 
 **4. Build and run the app using maven**
 
 ```bash
 mvn package
-java -jar target/spring-boot-rest-api-tutorial-0.0.1-SNAPSHOT.jar
+java -jar target/spring-boot-assignment-mohit-0.0.1-SNAPSHOT.jar
 
 ```
 
@@ -39,16 +34,77 @@ The app will start running at <http://localhost:8080>.
 
 The app defines following CRUD APIs.
 
-    GET /api/v1/users
+    GET /api/books
+    	Url: 
+    		http://localhost:8080/api/books
+		Input parameters:
+		Response: 
+			[
+    			{
+        			"id": 1,
+        			"bookName": "Mohit",
+        			"authorName": "Mohit",
+        			"createdAt": "2020-07-06T03:43:05.229+0000",
+        			"createdBy": "Mohit",
+        			"updatedAt": "2020-07-06T03:43:05.229+0000",
+        			"updatedBy": "Mohit"
+    			}    			
+    		]
+		
     
-    POST /api/v1/users
+    POST /api/books
+    	Url: 
+    		http://localhost:8080/api/book
+		Input parameters:
+			{
+    			"id": 0,
+    			"bookName": "Mohit",
+    			"authorName": "Mohit",
+    			"createdAt": null,
+    			"createdBy": "Mohit",
+    			"updatedAt": null,
+    			"updatedBy": "Mohit"
+			}
+		Response: 
+			{
+    			"id": 0,
+    			"bookName": "Mohit",
+    			"authorName": "Mohit",
+    			"createdAt": null,
+    			"createdBy": "Mohit",
+    			"updatedAt": null,
+    			"updatedBy": "Mohit"
+			}
     
-    GET /api/v1/users/{userId}
+    PUT /api/book/{bookId}
+    	Url: 
+    		http://localhost:8080/api/book
+		Input parameters:
+			bookId
+		Body:
+			{
+    			"id": 0,
+    			"bookName": "Mohit",
+    			"authorName": "Arora",
+    			"createdAt": null,
+    			"createdBy": "Mohit",
+    			"updatedAt": null,
+    			"updatedBy": "Mohit"
+			}
+		Response: 
+			{
+    			"id": 0,
+    			"bookName": "Mohit",
+    			"authorName": "Arora",
+    			"createdAt": null,
+    			"createdBy": "Mohit",
+    			"updatedAt": null,
+    			"updatedBy": "Mohit"
+			}
     
-    PUT /api/v1/users/{userId}
-    
-    DELETE /api/v1/users/{userId}
+    DELETE /api/book/{bookId}
+    	Input parameters:
+			bookId
+		Response: 
+			{"deleted" : true}
 
-You can find the tutorial for this application on my blog -
-
-<https://www.prathapgivantha.wordpress.com>
