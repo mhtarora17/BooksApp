@@ -29,7 +29,6 @@ public class BookService implements IBookService {
 			BeanUtils.copyProperties(book, bookDataObject);
 			bookDataObjects.add(bookDataObject);
 		}
-
 		return bookDataObjects;	
 	}
 
