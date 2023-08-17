@@ -58,6 +58,7 @@ public class BooksRestController {
 			throws ResourceNotFoundException {
 		BookDataObject bookDataObject = iBookService.getBookById(bookId);
 		return ResponseEntity.ok().body(bookDataObject);
+
 	}
 
 	/**
