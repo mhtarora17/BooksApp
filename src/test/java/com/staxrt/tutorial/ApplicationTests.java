@@ -1,22 +1,16 @@
 package com.staxrt.tutorial;
 
+import com.spring.assignment.Application;
+import com.spring.assignment.model.Book;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
-
-import com.spring.assignment.Application;
-import com.spring.assignment.model.Book;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -25,11 +19,8 @@ public class ApplicationTests {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
-	@LocalServerPort
-	private int port;
-
 	private String getRootUrl() {
-		return "http://localhost:" + port;
+		return "http://localhost:";
 	}
 
 	@Test
