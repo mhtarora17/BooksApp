@@ -58,4 +58,12 @@ public class BooksInventory {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		return "BooksInventory{" +
+				"bookId=" + bookId +
+				", availableStock=" + availableStock +
+				'}';
+	}
 }

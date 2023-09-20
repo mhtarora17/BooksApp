@@ -1,21 +1,17 @@
 package com.spring.assignment.service;
 
 import com.spring.assignment.dto.BookDataObject;
+import com.spring.assignment.dto.BookInventoryDataObject;
 import com.spring.assignment.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component("inventoryService")
 public interface IInventoryService {
 	
-	public List<BookDataObject> getAllBooks();
-	
-	public BookDataObject getBookById(Long bookId) throws ResourceNotFoundException;
-	
-	public BookDataObject createBook(BookDataObject book);
-	
-	public BookDataObject updateBooks(Long bookId,BookDataObject bookDataObject) throws ResourceNotFoundException;
-	
-	public Boolean deleteBooks(Long bookId) throws Exception;
+	public Map<Long, Integer> getInventoryData();
+
+	public String updateInventory(BookInventoryDataObject bookInventoryDataObject) throws ResourceNotFoundException;
 }

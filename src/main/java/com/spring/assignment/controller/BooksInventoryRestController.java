@@ -1,18 +1,16 @@
 package com.spring.assignment.controller;
 
-import com.spring.assignment.dto.BookDataObject;
+import com.spring.assignment.dto.BookInventoryDataObject;
 import com.spring.assignment.exception.ResourceNotFoundException;
-import com.spring.assignment.service.IBookService;
 import com.spring.assignment.service.IInventoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * The type Books controller.
@@ -26,6 +24,35 @@ public class BooksInventoryRestController {
 	@Autowired
 	@Qualifier(value = "inventoryService")
 	private IInventoryService iInventoryService;
+
+	@GetMapping("/booksInventory")
+	public Map<Long, Integer> getInventoryData() {
+		return iInventoryService.getInventoryData();
+	}
+
+	@GetMapping("/startMonitoring")
+	public String startMonitoring() {
+		ExecutorService ex = Executors.newFixedThreadPool(2);
+		ex.execute(() -> {
+			while (true) {
+				try {
+					Thread.sleep(1000l);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+				System.out.println(getInventoryData());
+			}
+		} );
+		return "Monitoring has been started";
+	}
+
+	@PutMapping("/updateBookInventory")
+	public String updateBookInventory(@Valid @RequestBody BookInventoryDataObject bookDataObject) throws ResourceNotFoundException {
+		return iInventoryService.updateInventory(bookDataObject);
+
+	}
+
+
 
 
 }

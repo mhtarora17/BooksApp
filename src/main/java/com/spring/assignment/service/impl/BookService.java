@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.spring.assignment.model.BooksInventory;
+import com.spring.assignment.repository.BooksInventoryRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class BookService implements IBookService {
 
 	@Autowired
 	private BooksRepository booksRepository;
+
+	@Autowired
+	private BooksInventoryRepository inventoryRepository;
 
 	@Override
 	public List<BookDataObject> getAllBooks() {
@@ -48,7 +53,12 @@ public class BookService implements IBookService {
 	public BookDataObject createBook(BookDataObject bookDataObject) {
 		Book book = new Book();
 		BeanUtils.copyProperties(bookDataObject, book);
-		booksRepository.save(book);
+		Book book1 = booksRepository.save(book);
+		BooksInventory booksInventory = new BooksInventory();
+		booksInventory.setBookId(book1.getId());
+		booksInventory.setAvailableStock(0);
+		booksInventory.setPrice(100);
+		inventoryRepository.save(booksInventory);
 		return bookDataObject;
 	}
 
